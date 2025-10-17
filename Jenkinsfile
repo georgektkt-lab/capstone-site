@@ -3,7 +3,6 @@ pipeline {
 
   options {
     timestamps()
-    ansiColor('xterm')
   }
 
   environment {
@@ -17,10 +16,9 @@ pipeline {
       steps {
         sh '''
           echo "WORKSPACE=$WORKSPACE"
-          echo "Listing workspace contents:"
           ls -la "$WORKSPACE"
 
-          echo "Ansible version (should exist):"
+          echo "Ansible version:"
           which ansible-playbook || true
           ansible-playbook --version || true
 
@@ -81,7 +79,6 @@ pipeline {
     stage('Deploy with Ansible') {
       steps {
         sh '''
-          # Pass the Jenkins workspace path to Ansible so it can copy files from SCM
           ansible-playbook -i "$INV" "$DEPLOY_PLAY" --extra-vars "ws=$WORKSPACE"
         '''
       }
