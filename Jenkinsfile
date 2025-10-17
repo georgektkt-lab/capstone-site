@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout HTML files') {
       steps {
-        git branch: 'main', url: 'https://github.com/REPLACE_ME/capstone-site.git'
+        git branch: 'main', url: 'https://github.com/georgektkt-lab/capstone-site.git'
       }
     }
     stage('Deploy with Ansible') {
